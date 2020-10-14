@@ -1,9 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
+import TopNav from "./NavBar";
 
 const App = () => {
-  return [<div>this is app</div>, <Button variant="primary">test</Button>];
+  return (
+    <>
+      <TopNav />
+    </>
+  );
 };
 
 export default App;
