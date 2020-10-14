@@ -9,7 +9,8 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "clinic": "clinic doctor -- node src/server/index.js",
-    "autocannon": "autocannon -c 5 -a 1500 localhost:8080"
+    "autocannon": "autocannon -c 5 -a 1500 localhost:8080",
+    "push": "git add . && git commit -nm 'added' && git push origin master"
   },
   "author": "KrishnaKanth",
   "license": "ISC",
