@@ -7,7 +7,9 @@
     "start": "npm run build && node src/server/index.js",
     "client": "webpack serve --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "clinic": "clinic doctor -- node src/server/index.js",
+    "autocannon": "autocannon -c 5 -a 1500 localhost:8080"
   },
   "author": "KrishnaKanth",
   "license": "ISC",
