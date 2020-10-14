@@ -1,13 +1,17 @@
+require("dotenv").config();
 const express = require("express");
-const os = require("os");
-
 const app = express();
 
-app.use(express.static("dist"));
-app.get("/api/getUsername", (req, res) =>
-  res.send({ username: os.userInfo().username })
-);
+// routes
 
-app.listen(process.env.PORT || 8080, () =>
-  console.log(`Listening on port ${process.env.PORT || 8080}!`)
-);
+require("./startup/routes")(app);
+require("./startup/db")();
+require("./startup/prod")(app);
+
+//app.use(express.static("dist"));
+
+app.set("view engine", "pug");
+app.set("views", "./views"); // to set default template
+
+const port = process.env.PORT || 8080;
+app.listen(port, () => console.log(`Listening on port ${port}!`));
