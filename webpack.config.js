@@ -35,15 +35,10 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
     ],
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
+    extensions: ["*", ".js", ".jsx"],
   },
   devServer: {
     port: 3000,
