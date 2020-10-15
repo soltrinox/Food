@@ -2,7 +2,7 @@
   "name": "food",
   "version": "1.0.0",
   "main": "src/server/index.js",
-  "homepage": "",
+  "homepage": "https://what-a-burger.netlify.app",
   "scripts": {
     "build": "webpack --mode production",
     "start": "npm run build && node src/server/index.js",
