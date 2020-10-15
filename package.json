@@ -20,6 +20,7 @@
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.5.3",
     "clinic": "^7.0.0",
+    "cloudinary": "^1.23.0",
     "compression": "^1.7.4",
     "config": "^3.3.2",
     "cors": "^2.8.5",
