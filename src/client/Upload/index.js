@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+
+import { useDispatch, useSelector } from "react-redux";
+import { uploadImage } from "../store/reducers/upload";
 
 const Upload = () => {
+  const dispatch = useDispatch();
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
+
   const handleClick = (e) => {
     const file = e.target.files[0];
     previewFile(file);
@@ -21,19 +25,7 @@ const Upload = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!previewSource) return;
-    uploadImage(previewSource);
-  };
-
-  const uploadImage = async (base64) => {
-    try {
-      await fetch("/api/getFoodItems", {
-        method: "POST",
-        body: JSON.stringify({ data: base64 }),
-        headers: { "Content-type": "application/json" },
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(uploadImage(previewSource));
   };
 
   return (

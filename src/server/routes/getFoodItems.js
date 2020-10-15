@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
     const upload = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "what-A-Burger",
     });
-    console.log(upload, "fileSt");
     res.json({ msg: "uploaded" });
   } catch (err) {
     res.status(500).json({ err: "Server down" });
