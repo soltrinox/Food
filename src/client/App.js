@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import Upload from "./Upload";
 import Gallery from "./Gallery";

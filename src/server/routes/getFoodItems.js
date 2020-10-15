@@ -1,6 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const Joi = require("joi");
 const { cloudinary } = require("../utils/cloudnary");
+
+function validate(req) {
+  const schema = Joi.object({
+    data: Joi.string().required(),
+  });
+  return schema.validate(req);
+}
 
 router.get("/", async (req, res) => {
   const { resources } = await cloudinary.search
@@ -13,6 +21,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
   try {
     const fileStr = req.body.data;
     const upload = await cloudinary.uploader.upload(fileStr, {
@@ -21,7 +31,6 @@ router.post("/", async (req, res) => {
     console.log(upload, "fileSt");
     res.json({ msg: "uploaded" });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ err: "Server down" });
   }
 });
