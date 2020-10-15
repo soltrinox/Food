@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const getFoodItems = require("../routes/getFoodItems");
+const employee = require("../routes/employee");
 
 module.exports = (app) => {
   app.use(express.static("public")); // to server static content
@@ -9,4 +10,5 @@ module.exports = (app) => {
   app.use(cors());
 
   app.use("/api/getFoodItems", getFoodItems);
+  app.use("/api/employee", employee);
 };
