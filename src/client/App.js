@@ -13,13 +13,7 @@ const App = () => {
     <>
       <TopNav />
       <Route exact path="/" component={Home} />
-      <Route
-        exact
-        path="/upload"
-        render={(props) => (
-          <PageTitle {...props} component={Upload} title="Upload images" />
-        )}
-      />
+      <Route exact path="/upload" component={Upload} />
       <Route
         exact
         path="/gallery"

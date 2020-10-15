@@ -2,6 +2,7 @@
   "name": "food",
   "version": "1.0.0",
   "main": "src/server/index.js",
+  "homepage": "",
   "scripts": {
     "build": "webpack --mode production",
     "start": "npm run build && node src/server/index.js",
