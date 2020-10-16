@@ -8,6 +8,6 @@ module.exports = function () {
       useUnifiedTopology: true,
     })
     .then(() => winston.info("conneted to mogodb.."))
-    .catch((err) => winston.info("Connected to Mongo"));
+    .catch((err) => winston.info("Failed to Connect database"));
   mongoose.set("useCreateIndex", true);
 };
