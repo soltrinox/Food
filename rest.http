@@ -1,0 +1,10 @@
+### Get with serch params (FirstName)
+
+GET http://localhost:8080/api/employee/?search=Phyllis
+
+### Get all the data
+
+GET http://localhost:8080/api/employee
+
+### Get with records count
+GET http://localhost:8080/api/employee/?records=100
