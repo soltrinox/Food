@@ -20,6 +20,11 @@ require("./startup/prod")(app);
 
 //const root = { hello: () => "hello world" };
 
+process.on("unhandledRejection", (ex) => {
+  // process.exit(1);
+  throw ex;
+});
+
 app.set("view engine", "pug");
 app.set("views", "./views"); // to set default template
 
