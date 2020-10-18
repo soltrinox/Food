@@ -1,16 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const path = require("path");
-//var cron = require("node-cron");
 
 require("./startup/routes")(app);
 require("./startup/db")();
 require("./startup/prod")(app);
-
-// cron.schedule("* * * * * *", () => {
-//   console.log("running a task every minute");
-// });
+// data jobs
+require("./datajobs/cron")();
 
 process.on("unhandledRejection", (ex) => {
   throw ex;
