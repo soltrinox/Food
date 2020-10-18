@@ -1,9 +1,11 @@
 const winston = require("winston");
 const mongoose = require("mongoose");
 
-module.exports = function () {
+const { MONGO_CONNECTION } = process.env;
+
+module.exports = () => {
   mongoose
-    .connect(process.env.MONGO_CONNECTION, {
+    .connect(MONGO_CONNECTION, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

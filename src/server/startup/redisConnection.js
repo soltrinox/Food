@@ -1,9 +1,12 @@
 const redis = require("redis");
 const { promisify } = require("util");
 
+const { REDIS_HOST, REDIS_PORT } = process.env;
+
+// redis default host 127.0.0.1 and port 6379
 const redisClient = redis.createClient({
-  host: "127.0.0.1", // default host
-  port: 6379, // default port
+  host: REDIS_HOST.toString(),
+  port: REDIS_PORT,
 });
 
 const GET_ASYNC = promisify(redisClient.get).bind(redisClient);
