@@ -1,10 +1,13 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const outputDirectory = "dist";
+const IS_DEV = process.env.NODE_ENV !== "production";
 
 module.exports = {
+  target: "web",
   entry: ["babel-polyfill", "./src/client/index.js"],
   devtool: "inline-source-map",
   output: {
@@ -53,8 +56,34 @@ module.exports = {
       cleanAfterEveryBuildPatterns: ["dist"],
     }),
     new HtmlWebpackPlugin({
+      // hash: true,
+      //inject: true,
+      // template: path.resolve(
+      //   __dirname,
+      //   "..",
+      //   "src",
+      //   "client",
+      //   "public",
+      //   "index.html"
+      // ),
       template: "./public/index.html",
       favicon: "./public/favicon.ico",
     }),
+    // new ExtractTextPlugin({
+    //   filename: "[name].css",
+    //   disable: IS_DEV,
+    // }),
+    //  new webpack.EnvironmentPlugin(["NODE_ENV"]),
   ],
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: "vendor",
+  //         chunks: "all",
+  //       },
+  //     },
+  //   },
+  // },
 };
