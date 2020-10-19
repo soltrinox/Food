@@ -1,10 +1,13 @@
+
+var MAIL_TO = "krishna.kondoju007@gmail.com"
+
 pipeline {
   agent {
       label: "nodejs"
   }
   tools {nodejs "Node 12.18.3"}
   environment {
-      MAIL_TO="krishna.kondoju007@gmail.com"
+      MAIL_TO=${MAIL_TO}
   } 
  options {
     disableConcurrentBuilds()
@@ -43,7 +46,7 @@ pipeline {
     }
     stage('Build zip') {
       steps {
-         sh """
+         sh ""
           npm ci --production
           rm -rf ./tmp || true
           mkdir tmp
@@ -58,7 +61,7 @@ pipeline {
             }
         }
         success {
-            mail(to: "${}",
+            mail(to: "${MAIL_TO}",
                 subject: "",
                 mimeType: 'type/html',
                 body: ""
