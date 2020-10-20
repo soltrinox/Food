@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const getFoodItems = require("../routes/getFoodItems");
 const employee = require("../routes/employee");
 const bootcamp = require("../routes/bootcamps");
+//const logger = require("../middleware/logger");
 
 module.exports = (app) => {
   app.use(express.static("public")); // to server static content
@@ -16,6 +17,8 @@ module.exports = (app) => {
   app.use(cookieParser()); // to capture req cookies
   app.use(responseTime()); // to catpure api response
   // Mount routers
+  // customer middleware
+  // app.use(logger);
   app.use("/api/getFoodItems", getFoodItems);
   app.use("/api/v1/employee", employee);
   app.use("/api/v1/bootcamps", bootcamp);

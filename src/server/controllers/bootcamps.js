@@ -3,7 +3,7 @@
 // @access  Public
 
 exports.getBootcamps = (req, res, next) => {
-  res.status(200).json({ success: true, data: { id: 1 } });
+  res.status(200).json({ success: true, msg: `show all ${req.hello}` });
 };
 
 // @desc   Get bootcamp
