@@ -1,11 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const responseTime = require("response-time");
-//const StatsD = require('node-statsd')
 const cookieParser = require("cookie-parser");
 
+// routes
 const getFoodItems = require("../routes/getFoodItems");
 const employee = require("../routes/employee");
+const bootcamp = require("../routes/bootcamps");
 
 module.exports = (app) => {
   app.use(express.static("public")); // to server static content
@@ -14,6 +15,8 @@ module.exports = (app) => {
   app.use(cors());
   app.use(cookieParser()); // to capture req cookies
   app.use(responseTime()); // to catpure api response
+  // Mount routers
   app.use("/api/getFoodItems", getFoodItems);
-  app.use("/api/employee", employee);
+  app.use("/api/v1/employee", employee);
+  app.use("/api/v1/bootcamps", bootcamp);
 };

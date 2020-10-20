@@ -29,6 +29,9 @@ const projectedVal = {
 };
 
 router.get("/", async (req, res) => {
+  // const { method, url } = req;
+  //res.setHeader("Content-Type", "application/json");
+  // res.setHeader("X-Powered-By", "Node.js");
   const getEmployeeDataRedis = await GET_ASYNC("employeeData");
   if (getEmployeeDataRedis) {
     console.log("using redis catch");
