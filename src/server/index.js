@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const colors = require("colors");
+const errorHandler = require("./middleware/error");
 
 const connectDB = require("./startup/db");
 // Dev logging middleware
@@ -14,7 +15,8 @@ require("./startup/routes")(app);
 require("./startup/prod")(app);
 // data jobs
 require("./datajobs/cron")();
-
+// custom error handler
+app.use(errorHandler);
 app.set("view engine", "pug");
 app.set("views", "./views"); // to set default template
 
