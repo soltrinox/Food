@@ -59,7 +59,14 @@ const BootcampSchema = new mongoose.Schema({
   careers: {
     type: [String],
     required: true,
-    enum: ["Web Development", "UI/UX", "Data Science", "Business", "Other"],
+    enum: [
+      "Web Development",
+      "UI/UX",
+      "Data Science",
+      "Business",
+      "Other",
+      "Mobile Development",
+    ],
   },
   averageRating: {
     type: Number,

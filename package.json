@@ -12,7 +12,9 @@
     "clinic": "clinic doctor -- node src/server/index.js",
     "autocannon": "autocannon -c 5 -a 1500 localhost:8080",
     "push": "git add . && git commit -nm 'added' && git push origin master",
-    "pm2": "pm2 start process.yml"
+    "pm2": "pm2 start process.yml",
+    "seader:i": "node src/server/seader.js -i",
+    "seader:d": "node src/server/seader.js -d"
   },
   "author": "KrishnaKanth",
   "license": "ISC",
