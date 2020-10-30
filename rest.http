@@ -1,10 +1,31 @@
 ### Get with serch params (FirstName)
-
 GET http://localhost:8080/api/employee/?search=Phyllis
 
 ### Get all the data
-
 GET http://localhost:8080/api/employee
 
 ### Get with records count
 GET http://localhost:8080/api/employee/?records=100
+
+### Get all bootcamps
+GET http://localhost:8080/api/v1/bootcamps
+
+### Get one bootcamp
+
+GET http://localhost:8080/api/v1/bootcamps/5f90f5ce3190204518ac7ac6
+
+### get bootcamps based on averagecost lte | lt | gte | gt
+GET http://localhost:8080/api/v1/bootcamps/?averageCost[lte]=5000
+
+### get with city name
+
+GET http://localhost:8080/api/v1/bootcamps/?averageCost[lte]=10000&location.city=Boston
+
+### get with array value
+GET http://localhost:8080/api/v1/bootcamps/?careers[in]=Data Science
+### get bootcamps based on radius
+
+GET http://localhost:8080/api/v1/bootcamps/radius/02118/100
+
+### select with names
+GET http://localhost:8080/api/v1/bootcamps/?select=website,name
