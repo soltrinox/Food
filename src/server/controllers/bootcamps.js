@@ -25,7 +25,7 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
   //copy requst query
   const reqQuery = { ...req.query };
   //fields to exclude
-  const removeFields = ["select", "sort"];
+  const removeFields = ["select", "sort", "page", "limit"];
   //loop over remove fields and delte them from req query
   removeFields.forEach((p) => delete reqQuery[p]);
   // Create query string
@@ -33,7 +33,8 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
   // Create operators
   queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, (a) => `$${a}`);
   // finding bootcamps
-  query = BootCamp.find(JSON.parse(queryStr));
+  query = BootCamp.find(JSON.parse(queryStr)).populate("courses");
+
   // selecting fields
   if (req.query.select) {
     const fields = req.query.select.split(",").join(" ");
@@ -46,11 +47,34 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
   } else {
     query = query.sort("-createdAt");
   }
+  // pagination
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 25;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+  const total = await BootCamp(JSON.parse(queryStr));
+
+  query = query.skip(startIndex).limit(limit);
   //excuting
   const bootcamp = await query;
+  //Pagination results
+  const pagination = {};
+  if (endIndex < total) {
+    pagination.next = {
+      page: page + 1,
+      limit,
+    };
+  }
+  if (startIndex > 0) {
+    pagination.prev = {
+      page: page - 1,
+      limit,
+    };
+  }
   res.status(200).json({
     success: true,
     count: bootcamp && bootcamp.length,
+    pagination,
     data: bootcamp,
   });
 });
@@ -111,13 +135,14 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 // @access  Private
 
 exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
-  const bootcamp = await BootCamp.findByIdAndDelete(req.params.id);
+  const bootcamp = await BootCamp.findById(req.params.id);
   if (!bootcamp) {
     return new ErrorResponse(
       `Bootcamp not found with id of ${req.params.id}`,
       404
     );
   }
+  bootcamp.remove();
   res.status(200).json({ success: true, data: {} });
 });
 
