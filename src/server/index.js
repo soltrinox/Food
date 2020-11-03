@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const colors = require("colors");
+const fileUpload = require("express-fileupload");
 const errorHandler = require("./middleware/error");
 
 const connectDB = require("./startup/db");
@@ -11,6 +12,8 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 connectDB();
+//File upload
+app.use(fileUpload());
 require("./startup/routes")(app);
 require("./startup/prod")(app);
 // data jobs
