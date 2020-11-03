@@ -22,6 +22,7 @@
     "autocannon": "^6.5.0",
     "axios": "^0.20.0",
     "babel-polyfill": "^6.26.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.3",
     "clinic": "^7.0.0",
     "cloudinary": "^1.23.0",
