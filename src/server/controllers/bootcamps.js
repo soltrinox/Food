@@ -47,11 +47,23 @@ exports.getBootcamp = asyncHandler(async (req, res, next) => {
 // @access  Private
 
 exports.createBootcamp = asyncHandler(async (req, res, next) => {
+  // Add user
+  req.body.user = req.user.id;
+  //check for published bootcamp
+  const publishedBootcamp = await BootCamp.findOne({ user: req.user.id });
+  // if the user is not an admin they can only add one bootcamp
+  if (publishedBootcamp && req.user.role !== "admin") {
+    return next(
+      new ErrorResponse(
+        `The user with Id ${req.user.id} has already published`,
+        400
+      )
+    );
+  }
   const bootcamp = await BootCamp.create(req.body);
   if (!bootcamp) {
-    return new ErrorResponse(
-      `Bootcamp not found with id of ${req.params.id}`,
-      404
+    return next(
+      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
     );
   }
   res.status(201).json({ success: true, data: bootcamp });
@@ -68,9 +80,8 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
   });
 
   if (!bootcamp) {
-    return new ErrorResponse(
-      `Bootcamp not found with id of ${req.params.id}`,
-      404
+    return next(
+      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
     );
   }
   res.status(200).json({ success: true, data: bootcamp });
@@ -83,9 +94,8 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await BootCamp.findById(req.params.id);
   if (!bootcamp) {
-    return new ErrorResponse(
-      `Bootcamp not found with id of ${req.params.id}`,
-      404
+    return next(
+      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
     );
   }
   bootcamp.remove();
