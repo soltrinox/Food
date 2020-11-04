@@ -66,6 +66,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
+
   if (!bootcamp) {
     return new ErrorResponse(
       `Bootcamp not found with id of ${req.params.id}`,
