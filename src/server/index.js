@@ -4,8 +4,8 @@ const app = express();
 const morgan = require("morgan");
 const colors = require("colors");
 const fileUpload = require("express-fileupload");
-const errorHandler = require("./middleware/error");
 
+const errorHandler = require("./middleware/error");
 const connectDB = require("./startup/db");
 // Dev logging middleware
 if (process.env.NODE_ENV === "development") {
@@ -14,8 +14,9 @@ if (process.env.NODE_ENV === "development") {
 connectDB();
 //File upload
 app.use(fileUpload());
-require("./startup/routes")(app);
+
 require("./startup/prod")(app);
+require("./startup/routes")(app);
 // data jobs
 require("./datajobs/cron")();
 // custom error handler
